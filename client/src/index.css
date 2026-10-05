@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* ── Base resets & typography ────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #1d1d1f;
+  background: #fafafa;
+}
+
+/* ── Upload drop-zone interaction ────────────────────────────────────── */
+
+.upload-zone {
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.upload-zone:hover {
+  border-color: #a1a1aa;
+  background-color: #f4f4f5;
+}
+
+.upload-zone.drag-over {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+
+/* ── Smooth fade-in for generated result ─────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out both;
+}
+
+/* ── Spinner ─────────────────────────────────────────────────────────── */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 2.5px solid #e4e4e7;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
