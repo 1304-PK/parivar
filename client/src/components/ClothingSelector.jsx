@@ -13,7 +13,7 @@ export default function ClothingSelector({ gender, value, onChange }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="clothing-select" className="text-sm font-medium text-zinc-700">
+      <label htmlFor="clothing-select" className="text-sm font-medium text-brown">
         Clothing
       </label>
 
@@ -21,7 +21,7 @@ export default function ClothingSelector({ gender, value, onChange }) {
         id="clothing-select"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full max-w-xs appearance-none rounded-lg border border-zinc-200 bg-white px-4 py-2.5 text-sm text-zinc-900 shadow-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 cursor-pointer"
+        className="w-full max-w-xs appearance-none rounded-lg border border-beige bg-white-warm px-4 py-2.5 text-sm text-brown shadow-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-caramel focus-visible:ring-offset-2 cursor-pointer"
       >
         <option value="" disabled>
           Select clothing type

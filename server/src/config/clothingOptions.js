@@ -5,19 +5,14 @@
 
 export const clothingOptions = {
   male: [
-    'T-Shirt',
     'Shirt',
-    'Jacket',
-    'Hoodie',
-    'Formal Wear',
+    'Pant',
+    'Coat',
+    'Sherwani',
   ],
   female: [
-    'Dress',
-    'Top',
-    'Jacket',
     'Saree',
-    'Kurti',
-    'Formal Wear',
+    'Lehenga',
   ],
 };
 

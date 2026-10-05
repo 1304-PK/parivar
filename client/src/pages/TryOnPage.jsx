@@ -63,14 +63,14 @@ export default function TryOnPage() {
 
   // ── Render ─────────────────────────────────────────────────────────
   return (
-    <main className="min-h-dvh bg-[#fafafa]">
-      <div className="mx-auto max-w-2xl px-6 py-16 sm:py-24 flex flex-col gap-10">
+    <main className="min-h-[100svh] bg-warm-cream font-sans">
+      <div className="mx-auto max-w-2xl px-6 py-12 sm:py-20 flex flex-col gap-10">
         {/* Header */}
         <header className="text-center">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900">
-            AI Try-On
+          <h1 className="text-4xl sm:text-5xl font-serif tracking-tight text-brown">
+            See yourself in any outfit.
           </h1>
-          <p className="mt-2 text-base text-zinc-500">
+          <p className="mt-2 text-lg text-soft-brown">
             Create your virtual try-on image
           </p>
         </header>
@@ -105,7 +105,7 @@ export default function TryOnPage() {
 
         {/* Error */}
         {error && (
-          <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2.5 text-center">
+          <p className="text-sm text-red-800 bg-red-100/50 border border-red-200 rounded-lg px-4 py-2.5 text-center">
             {error}
           </p>
         )}

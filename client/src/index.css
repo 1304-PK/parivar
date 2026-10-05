@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@theme {
+  --color-cream: #F7F0E6;
+  --color-warm-cream: #F3E9DA;
+  --color-beige: #C8B5A1; /* Darker shade for borders */
+  --color-brown: #4A3328;
+  --color-caramel: #9C6F4B;
+  --color-soft-brown: #806552;
+  --color-white-warm: #FFFDF8;
+
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
 /* ── Base resets & typography ────────────────────────────────────────── */
 
 *,
@@ -29,13 +42,13 @@ body {
 }
 
 .upload-zone:hover {
-  border-color: #a1a1aa;
-  background-color: #f4f4f5;
+  border-color: var(--color-caramel);
+  background-color: var(--color-cream);
 }
 
 .upload-zone.drag-over {
-  border-color: #3b82f6;
-  background-color: #eff6ff;
+  border-color: var(--color-brown);
+  background-color: var(--color-cream);
 }
 
 /* ── Smooth fade-in for generated result ─────────────────────────────── */
@@ -58,8 +71,8 @@ body {
 .spinner {
   width: 24px;
   height: 24px;
-  border: 2.5px solid #e4e4e7;
-  border-top-color: #3b82f6;
+  border: 2.5px solid var(--color-beige);
+  border-top-color: var(--color-caramel);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }

@@ -18,7 +18,12 @@ export async function generateTryOn({ personImage, dressImage, gender, clothingT
     body: formData,
   });
 
-  const json = await res.json();
+  let json;
+  try {
+    json = await res.json();
+  } catch (err) {
+    throw new Error('Server returned an invalid response. Ensure the backend is running.');
+  }
 
   if (!res.ok || !json.success) {
     throw new Error(json.error || 'Something went wrong. Please try again.');

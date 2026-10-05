@@ -74,24 +74,24 @@ export default function ImageUpload({ label, hint, file, onSelect, onError }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <span className="text-sm font-medium text-zinc-700">{label}</span>
+      <span className="text-sm font-medium text-brown">{label}</span>
 
       {preview ? (
         /* ── Selected state ────────────────────────────────────────── */
-        <div className="relative rounded-xl border border-zinc-200 overflow-hidden bg-white">
+        <div className="relative rounded-2xl border border-beige overflow-hidden bg-white-warm shadow-sm">
           <img
             src={preview}
             alt={`${label} preview`}
-            className="w-full aspect-[3/4] object-cover"
+            className="w-full aspect-[4/5] object-cover"
           />
-          <div className="px-4 py-3 flex items-center justify-between border-t border-zinc-100">
-            <span className="text-xs text-zinc-500 truncate max-w-[60%]">
+          <div className="px-4 py-3 flex items-center justify-between border-t border-beige bg-white-warm/80 backdrop-blur-sm">
+            <span className="text-xs text-soft-brown truncate max-w-[60%] font-medium">
               {file?.name}
             </span>
             <button
               type="button"
               onClick={openPicker}
-              className="text-xs font-medium text-blue-600 hover:text-blue-700 transition-colors cursor-pointer"
+              className="text-xs font-medium text-caramel hover:text-brown transition-colors cursor-pointer"
             >
               Replace
             </button>
@@ -105,15 +105,15 @@ export default function ImageUpload({ label, hint, file, onSelect, onError }) {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
-          className={`upload-zone flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-zinc-300 bg-white aspect-[3/4] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 ${
-            dragging ? 'drag-over' : ''
+          className={`upload-zone flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-beige bg-white-warm aspect-[4/5] cursor-pointer transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-caramel focus-visible:ring-offset-2 ${
+            dragging ? 'drag-over' : 'hover:border-caramel hover:bg-cream'
           }`}
           aria-label={hint}
         >
-          <span className="text-3xl leading-none text-zinc-400">+</span>
-          <span className="text-sm text-zinc-500">{hint}</span>
-          <span className="text-xs text-zinc-400">JPG, PNG or WebP</span>
-          <span className="text-xs text-zinc-400">Up to 10 MB</span>
+          <span className="text-3xl leading-none text-soft-brown opacity-50">+</span>
+          <span className="text-sm text-soft-brown font-medium">{hint}</span>
+          <span className="text-xs text-soft-brown opacity-75">JPG, PNG or WebP</span>
+          <span className="text-xs text-soft-brown opacity-75">Up to 10 MB</span>
         </button>
       )}
 

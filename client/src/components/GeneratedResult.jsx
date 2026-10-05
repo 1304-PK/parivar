@@ -12,16 +12,16 @@ export default function GeneratedResult({ image, mimeType, mock }) {
   const src = `data:${mimeType};base64,${image}`;
 
   return (
-    <section className="flex flex-col items-center gap-4 fade-in">
-      <h2 className="text-lg font-semibold text-zinc-900">Generated Result</h2>
+    <section className="flex flex-col items-center gap-4 fade-in pb-8">
+      <h2 className="text-2xl font-serif text-brown">Generated Result</h2>
 
       {mock && (
-        <p className="text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5">
+        <p className="text-xs text-amber-800 bg-amber-100/50 border border-amber-200 rounded-lg px-3 py-1.5">
           Mock mode — no API key configured. This is a placeholder image.
         </p>
       )}
 
-      <div className="w-full max-w-md rounded-2xl overflow-hidden border border-zinc-200 shadow-sm bg-white">
+      <div className="w-full max-w-md rounded-2xl overflow-hidden border border-beige shadow-sm bg-white-warm p-2">
         <img
           src={src}
           alt="AI-generated virtual try-on result"
