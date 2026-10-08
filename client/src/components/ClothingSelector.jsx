@@ -1,7 +1,7 @@
 import { clothingOptions } from '../data/clothingOptions';
 
 /**
- * Dropdown selector for clothing category.
+ * Selector for clothing category.
  *
  * Props:
  *   gender   – current gender selection
@@ -13,25 +13,25 @@ export default function ClothingSelector({ gender, value, onChange }) {
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor="clothing-select" className="text-sm font-medium text-brown">
+      <label className="text-sm font-medium text-brown">
         Clothing
       </label>
 
-      <select
-        id="clothing-select"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full max-w-xs appearance-none rounded-lg border border-beige bg-white-warm px-4 py-2.5 text-sm text-brown shadow-sm transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-caramel focus-visible:ring-offset-2 cursor-pointer"
-      >
-        <option value="" disabled>
-          Select clothing type
-        </option>
+      <div className="flex flex-wrap gap-2">
         {options.map((opt) => (
-          <option key={opt} value={opt}>
+          <button
+            key={opt}
+            onClick={() => onChange(opt)}
+            className={`px-4 py-2 text-sm rounded-lg border transition-colors shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-caramel focus-visible:ring-offset-2 ${
+              value === opt
+                ? 'bg-caramel text-white border-caramel'
+                : 'bg-white-warm text-brown border-beige hover:bg-beige/20'
+            }`}
+          >
             {opt}
-          </option>
+          </button>
         ))}
-      </select>
+      </div>
     </div>
   );
 }

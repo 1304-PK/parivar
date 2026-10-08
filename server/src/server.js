@@ -37,10 +37,14 @@ app.use((err, _req, res, _next) => {
   return res.status(500).json({ success: false, error: 'An unexpected error occurred.' });
 });
 
-// --- Start --------------------------------------------------------------
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-  if (!process.env.GOOGLE_AI_API_KEY) {
-    console.log('⚠  GOOGLE_AI_API_KEY not set — running in mock mode.');
-  }
-});
+// --- Start / Export -------------------------------------------------------
+if (process.env.NODE_ENV !== 'production' || process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+    if (!process.env.GEMINI_API_KEY) {
+      console.log('⚠  GEMINI_API_KEY not set — running in mock mode.');
+    }
+  });
+}
+
+export default app;

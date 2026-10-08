@@ -5,9 +5,9 @@ let ai = null;
 
 function getClient() {
   if (!ai) {
-    const apiKey = process.env.GOOGLE_AI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      throw new Error('GOOGLE_AI_API_KEY is not set in environment variables.');
+      throw new Error('GEMINI_API_KEY is not set in environment variables.');
     }
     ai = new GoogleGenAI({ apiKey });
   }

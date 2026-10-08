@@ -50,8 +50,8 @@ export async function generate(req, res) {
       return res.status(400).json({ success: false, error: 'A valid clothing type is required.' });
     }
 
-    // --- Call Google AI or mock ------------------------------------------
-    const useMock = !process.env.GOOGLE_AI_API_KEY;
+    // --- Call Google AI (Gemini) or mock ------------------------------------------
+    const useMock = !process.env.GEMINI_API_KEY;
     const result = useMock
       ? await generateMockImage()
       : await generateTryOnImage({
