@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import parivarImage from '../assets/parivar_image.png';
 import { clothingOptions } from '../data/clothingOptions';
 import { generateTryOn } from '../services/api';
 
@@ -64,12 +65,14 @@ export default function TryOnPage() {
   // ── Render ─────────────────────────────────────────────────────────
   return (
     <main className="min-h-[100svh] bg-warm-cream font-sans">
-      <div className="mx-auto max-w-2xl px-6 py-12 sm:py-20 flex flex-col gap-10">
+      <div className="mx-auto max-w-2xl px-6 py-12 sm:py-10 flex flex-col gap-10">
         {/* Header */}
         <header className="text-center">
-          <h1 className="text-4xl sm:text-5xl font-serif tracking-tight text-brown">
-            See yourself in any outfit.
-          </h1>
+          <img
+            src={parivarImage}
+            alt="Parivar"
+            className="mx-auto h-30 sm:h-40 w-auto object-contain"
+          />
           <p className="mt-2 text-lg text-soft-brown">
             Create your virtual try-on image
           </p>
