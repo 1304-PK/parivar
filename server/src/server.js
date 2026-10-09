@@ -33,8 +33,8 @@ app.use((err, _req, res, _next) => {
     return res.status(400).json({ success: false, error: err.message });
   }
 
-  console.error('[Server] Unhandled error:', err.message);
-  return res.status(500).json({ success: false, error: 'An unexpected error occurred.' });
+  console.error('[Server Error]', err);
+  return res.status(500).json({ success: false, error: err.message || 'An unexpected error occurred.' });
 });
 
 // --- Start / Export -------------------------------------------------------

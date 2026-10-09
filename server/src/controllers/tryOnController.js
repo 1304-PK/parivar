@@ -72,10 +72,10 @@ export async function generate(req, res) {
       },
     });
   } catch (err) {
-    console.error('[TryOnController] Generation failed:', err.message);
+    console.error('[TryOnController] Generation error:', err);
     return res.status(500).json({
       success: false,
-      error: 'Unable to generate the image. Please try again.',
+      error: err.message || 'Unable to generate the image. Please try again.',
     });
   }
 }

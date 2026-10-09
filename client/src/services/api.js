@@ -26,6 +26,7 @@ export async function generateTryOn({ personImage, dressImage, gender, clothingT
   }
 
   if (!res.ok || !json.success) {
+    console.error('[Server Error Response]:', json.error || json);
     throw new Error(json.error || 'Something went wrong. Please try again.');
   }
 
