@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 const ACCEPTED = '.jpg,.jpeg,.png,.webp';
-const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
 
 /**
  * Reusable drag-and-drop image upload card.
@@ -35,10 +34,6 @@ export default function ImageUpload({ label, hint, file, onSelect, onError }) {
       const allowed = ['image/jpeg', 'image/png', 'image/webp'];
       if (!allowed.includes(f.type)) {
         onError?.('Only JPG, PNG, or WebP images are allowed.');
-        return false;
-      }
-      if (f.size > MAX_SIZE) {
-        onError?.('Image must be under 10 MB.');
         return false;
       }
       return true;
@@ -120,7 +115,7 @@ export default function ImageUpload({ label, hint, file, onSelect, onError }) {
         >
           <span className="text-3xl leading-none text-soft-brown opacity-50">+</span>
           <span className="text-sm text-soft-brown font-medium">{hint}</span>
-          <span className="text-xs text-soft-brown opacity-75">JPG, PNG or WebP · Up to 10 MB</span>
+          <span className="text-xs text-soft-brown opacity-75">JPG, PNG or WebP</span>
 
           {/* Action buttons */}
           <div className="flex gap-2 mt-1">

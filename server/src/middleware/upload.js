@@ -1,5 +1,5 @@
 import multer from 'multer';
-import { MAX_FILE_SIZE, ALLOWED_MIME_TYPES } from '../config/upload.js';
+import { ALLOWED_MIME_TYPES } from '../config/upload.js';
 
 /**
  * Multer configured with memory storage so files stay in RAM as buffers.
@@ -18,5 +18,4 @@ function fileFilter(_req, file, cb) {
 export const upload = multer({
   storage,
   fileFilter,
-  limits: { fileSize: MAX_FILE_SIZE },
 });

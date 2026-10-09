@@ -1,4 +1,29 @@
+import imageCompression from 'browser-image-compression';
+
 const API_BASE = '/api/try-on';
+
+/**
+ * Helper to compress an image file to < 1.3 MB
+ * @param {File} file 
+ * @returns {Promise<File>}
+ */
+async function compressImage(file) {
+  const options = {
+    maxSizeMB: 1.25, // Target less than 1.3 MB
+    maxWidthOrHeight: 1920,
+    useWebWorker: true,
+    initialQuality: 0.88,
+    fileType: 'image/webp' // WebP offers better compression
+  };
+  try {
+    const compressedFile = await imageCompression(file, options);
+    console.log(`Compressed ${file.name} from ${(file.size / 1024 / 1024).toFixed(2)} MB to ${(compressedFile.size / 1024 / 1024).toFixed(2)} MB`);
+    return compressedFile;
+  } catch (error) {
+    console.error(`Error compressing ${file.name}:`, error);
+    return file; // Fallback to original file on error
+  }
+}
 
 /**
  * Send try-on generation request to the backend.
@@ -7,9 +32,19 @@ const API_BASE = '/api/try-on';
  * @returns {Promise<{ success: boolean, data?: { image: string, mimeType: string, mock: boolean }, error?: string }>}
  */
 export async function generateTryOn({ personImage, dressImage, gender, clothingType }) {
+  let compressedPersonImage = personImage;
+  let compressedDressImage = dressImage;
+
+  try {
+    compressedPersonImage = await compressImage(personImage);
+    compressedDressImage = await compressImage(dressImage);
+  } catch (err) {
+    console.warn("Failed to compress images, proceeding with original files.", err);
+  }
+
   const formData = new FormData();
-  formData.append('personImage', personImage);
-  formData.append('dressImage', dressImage);
+  formData.append('personImage', compressedPersonImage);
+  formData.append('dressImage', compressedDressImage);
   formData.append('gender', gender);
   formData.append('clothingType', clothingType);
 

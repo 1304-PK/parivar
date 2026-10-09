@@ -1,5 +1,5 @@
 import { VALID_GENDERS, isValidClothingType } from '../config/clothingOptions.js';
-import { ALLOWED_MIME_TYPES, MAX_FILE_SIZE } from '../config/upload.js';
+import { ALLOWED_MIME_TYPES } from '../config/upload.js';
 import { generateTryOnImage, generateMockImage } from '../services/googleAiService.js';
 
 /**
@@ -30,14 +30,6 @@ export async function generate(req, res) {
     }
     if (!ALLOWED_MIME_TYPES.includes(dressFile.mimetype)) {
       return res.status(400).json({ success: false, error: 'Dress image must be JPG, PNG, or WebP.' });
-    }
-
-    // --- Validate sizes -------------------------------------------------
-    if (personFile.size > MAX_FILE_SIZE) {
-      return res.status(400).json({ success: false, error: 'Person image exceeds 10 MB limit.' });
-    }
-    if (dressFile.size > MAX_FILE_SIZE) {
-      return res.status(400).json({ success: false, error: 'Dress image exceeds 10 MB limit.' });
     }
 
     // --- Validate text fields -------------------------------------------
