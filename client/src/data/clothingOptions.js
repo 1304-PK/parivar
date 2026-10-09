@@ -3,6 +3,6 @@
  * Keep in sync with the server's config/clothingOptions.js.
  */
 export const clothingOptions = {
-  male: ['Kurta', 'Pajama', 'Shirt', 'Pant', 'Coat', 'Bandi'],
+  male: ['Kurta', 'Shirt', 'Pant', 'Coat', 'Sherwani'],
   female: ['Saree', 'Lehenga'],
 };

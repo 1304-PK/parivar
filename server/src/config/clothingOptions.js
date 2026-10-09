@@ -5,6 +5,7 @@
 
 export const clothingOptions = {
   male: [
+    'Kurta',
     'Shirt',
     'Pant',
     'Coat',
