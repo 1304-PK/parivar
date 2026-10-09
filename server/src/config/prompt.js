@@ -14,17 +14,27 @@ const MALE_SPECS = {
 };
 
 /**
+ * Garment-specific specification blocks for female garments.
+ */
+const FEMALE_SPECS = {
+  Lehenga: `A three-piece lehenga set from the same fabric: a full-length flared skirt with a fitted waistband and soft even pleats falling to the ankles; a fitted choli with a modest neckline and elbow-length or full sleeves, fully covering the chest; and a dupatta draped over one shoulder (or both) and falling naturally to the hip or knee, partly covering the midriff. Skirt volume flares from the waist without changing the person's hip or leg shape. Footwear stays visible as in IMAGE 1. Keep the set plain unless IMAGE 2 has a pattern.`,
+
+  Saree: `A traditionally draped saree in the Nivi style. Pleats (5 to 7, even, crisp) tucked at the navel, falling straight to the ankles and just clearing the feet. The pallu crosses the torso and drapes over the LEFT shoulder, falling behind with a visible pleated section across the chest. A fitted blouse made from the same fabric, with a modest round or boat neckline, no plunging neck, sleeves to the elbow or above. The blouse and pallu fully cover the chest. The midriff is covered by the pallu and wrap, with only the minimal traditional gap at the waist. The drape follows the person's real body and pose, with believable fabric weight, tension at the waist and natural overlap. Keep hair, jewelry and hands in front of the fabric as in IMAGE 1. No unrelated blouse color or fabric.`,
+};
+
+/**
  * Build the final prompt string with gender and clothing type substituted in.
  *
  * @param {{ gender: string, clothingType: string }} params
  * @returns {string}
  */
 export function buildPrompt({ gender, clothingType }) {
-  // Resolve garment spec — currently only male specs defined
-  const spec =
-    gender === 'male'
-      ? (MALE_SPECS[clothingType] ?? `A standard ${clothingType} appropriate for a ${gender}.`)
-      : `A standard ${clothingType} appropriate for a ${gender}.`;
+  let spec = `A standard ${clothingType} appropriate for a ${gender}.`;
+  if (gender === 'male' && MALE_SPECS[clothingType]) {
+    spec = MALE_SPECS[clothingType];
+  } else if (gender === 'female' && FEMALE_SPECS[clothingType]) {
+    spec = FEMALE_SPECS[clothingType];
+  }
 
   return `
 TASK
