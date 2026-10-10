@@ -1,4 +1,4 @@
-import ZoomableImage from './ZoomableImage';
+import OverlayImage from './OverlayImage';
 
 /**
  * Displays the AI-generated result image(s).
@@ -29,8 +29,8 @@ export default function GeneratedResult({ images, mock }) {
                 <h3 className="text-lg font-medium text-soft-brown">{item.styleName}</h3>
               )}
               <div className="w-full rounded-2xl overflow-hidden border border-beige shadow-sm bg-white-warm p-2">
-                <ZoomableImage
-                  src={src}
+                <OverlayImage
+                  baseSrc={src}
                   alt={`AI-generated virtual try-on result ${item.styleName || ''}`}
                   className="w-full h-auto rounded-xl"
                 />
