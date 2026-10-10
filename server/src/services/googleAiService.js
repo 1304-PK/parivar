@@ -65,6 +65,8 @@ export async function generateTryOnImage({
     ],
     config: {
       responseModalities: ['TEXT', 'IMAGE'],
+      // Requesting 0.5k resolution equivalent (512x512)
+      outputResolution: '512x512',
     },
   });
 
