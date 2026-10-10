@@ -7,7 +7,7 @@ const API_BASE = '/api/try-on';
  * @param {File} file 
  * @returns {Promise<File>}
  */
-async function compressImage(file) {
+export async function compressImage(file) {
   const options = {
     maxSizeMB: 1.25, // Target less than 1.3 MB
     maxWidthOrHeight: 1920,
