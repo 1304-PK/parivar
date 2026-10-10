@@ -1,19 +1,18 @@
+import ZoomableImage from './ZoomableImage';
+
 /**
- * Displays the AI-generated result image.
+ * Displays the AI-generated result image(s).
  *
  * Props:
- *   image    – base64 string
- *   mimeType – e.g. "image/png"
+ *   images   - array of { image, mimeType, styleName }
  *   mock     – boolean (true if this was a mock result)
  */
-export default function GeneratedResult({ image, mimeType, mock }) {
-  if (!image) return null;
-
-  const src = `data:${mimeType};base64,${image}`;
+export default function GeneratedResult({ images, mock }) {
+  if (!images || images.length === 0) return null;
 
   return (
     <section className="flex flex-col items-center gap-4 fade-in pb-8">
-      <h2 className="text-2xl font-serif text-brown">Generated Result</h2>
+      <h2 className="text-2xl font-serif text-brown">Generated Result{images.length > 1 ? 's' : ''}</h2>
 
       {mock && (
         <p className="text-xs text-amber-800 bg-amber-100/50 border border-amber-200 rounded-lg px-3 py-1.5">
@@ -21,12 +20,24 @@ export default function GeneratedResult({ image, mimeType, mock }) {
         </p>
       )}
 
-      <div className="w-full max-w-md rounded-2xl overflow-hidden border border-beige shadow-sm bg-white-warm p-2">
-        <img
-          src={src}
-          alt="AI-generated virtual try-on result"
-          className="w-full h-auto"
-        />
+      <div className={`grid grid-cols-1 ${images.length > 1 ? 'md:grid-cols-2' : ''} gap-6 w-full max-w-4xl`}>
+        {images.map((item, index) => {
+          const src = `data:${item.mimeType || 'image/png'};base64,${item.image}`;
+          return (
+            <div key={index} className="flex flex-col items-center gap-2">
+              {item.styleName && (
+                <h3 className="text-lg font-medium text-soft-brown">{item.styleName}</h3>
+              )}
+              <div className="w-full rounded-2xl overflow-hidden border border-beige shadow-sm bg-white-warm p-2">
+                <ZoomableImage
+                  src={src}
+                  alt={`AI-generated virtual try-on result ${item.styleName || ''}`}
+                  className="w-full h-auto rounded-xl"
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

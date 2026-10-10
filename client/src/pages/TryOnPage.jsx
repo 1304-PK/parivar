@@ -128,8 +128,7 @@ export default function TryOnPage() {
         {/* Result */}
         {result && (
           <GeneratedResult
-            image={result.image}
-            mimeType={result.mimeType}
+            images={result.images || (result.image ? [{ image: result.image, mimeType: result.mimeType, styleName: 'Result' }] : [])}
             mock={result.mock}
           />
         )}

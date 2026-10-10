@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import ZoomableImage from './ZoomableImage';
 
 const ACCEPTED = '.jpg,.jpeg,.png,.webp';
 const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
@@ -81,7 +82,7 @@ export default function ImageUpload({ label, hint, file, onSelect, onError }) {
       {preview ? (
         /* ── Selected state ────────────────────────────────────────── */
         <div className="relative rounded-2xl border border-beige overflow-hidden bg-white-warm shadow-sm">
-          <img
+          <ZoomableImage
             src={preview}
             alt={`${label} preview`}
             className="w-full aspect-[4/5] object-cover"

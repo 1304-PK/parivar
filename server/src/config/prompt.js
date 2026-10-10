@@ -19,7 +19,9 @@ const MALE_SPECS = {
 const FEMALE_SPECS = {
   Lehenga: `A three-piece lehenga set from the same fabric: a full-length flared skirt with a fitted waistband and soft even pleats falling to the ankles; a fitted choli with a modest neckline and elbow-length or full sleeves, fully covering the chest; and a dupatta draped over one shoulder (or both) and falling naturally to the hip or knee, partly covering the midriff. Skirt volume flares from the waist without changing the person's hip or leg shape. Footwear stays visible as in IMAGE 1. Keep the set plain unless IMAGE 2 has a pattern.`,
 
-  Saree: `A traditionally draped saree in the Nivi style. Pleats (5 to 7, even, crisp) tucked at the navel, falling straight to the ankles and just clearing the feet. The pallu crosses the torso and drapes over the LEFT shoulder, falling behind with a visible pleated section across the chest. A fitted blouse made from the same fabric, with a modest round or boat neckline, no plunging neck, sleeves to the elbow or above. The blouse and pallu fully cover the chest. The midriff is covered by the pallu and wrap, with only the minimal traditional gap at the waist. The drape follows the person's real body and pose, with believable fabric weight, tension at the waist and natural overlap. Keep hair, jewelry and hands in front of the fabric as in IMAGE 1. No unrelated blouse color or fabric.`,
+  Saree_Nivi: `A classic NIVI-style saree drape, sewn from the IMAGE 2 fabric. Even, crisp pleats (5 to 7) are tucked at the navel and fall straight to the floor, grazing the ground and covering the feet except the tips of the footwear. The saree wraps once around the waist and then crosses the torso diagonally to the wearer's LEFT shoulder. The pallu rests over the LEFT SHOULDER and falls BEHIND the back, with the free end flowing softly at the side. A fitted blouse in the same fabric, with a neat scoop or boat neckline that fully covers the chest, and short or sleeveless arms. As in a traditional Nivi, a narrow band of midriff skin is visible between the blouse and the saree waist, and no skin shows above that line. The drape follows the existing pose of IMAGE 1, with believable fabric weight, tension at the waist and soft folds at the shoulder. Keep necklaces, hair, hands and any handbag in front of the fabric as in IMAGE 1. No contrasting border, print or trim unless IMAGE 2 has it. No unrelated blouse color or fabric.`,
+  
+  Saree_Seedha_Pallu: `A traditionally draped saree in the SEEDHA PALLU style (Gujarati drape), sewn from the IMAGE 2 fabric. Even, crisp pleats (5 to 7) are tucked at the navel and fall straight down to the ankles, just clearing the floor and showing the footwear. The pallu is brought from the back OVER THE WEARER'S RIGHT SHOULDER to the FRONT and spread across the chest and torso, falling diagonally toward the wearer's left hip, with its end hanging around hip to knee level. The pallu is clearly visible in front, not hanging behind the back. It neatly covers the midriff and part of the blouse. A fitted blouse in the same fabric, with a modest round neckline, short sleeves to above the elbow and a closed back neckline, fully covers the chest and shoulders. The wrap tension at the waist and the overlap of the layers must look believable. The pallu follows the existing pose and hands in IMAGE 1 (for example, joined hands, with the pallu falling around them). Keep necklaces, hair and hands in front of the fabric. No contrasting border, print or trim unless IMAGE 2 has it. No unrelated blouse color or fabric.`
 };
 
 /**
@@ -28,12 +30,19 @@ const FEMALE_SPECS = {
  * @param {{ gender: string, clothingType: string }} params
  * @returns {string}
  */
-export function buildPrompt({ gender, clothingType }) {
+export function buildPrompt({ gender, clothingType, style }) {
   let spec = `A standard ${clothingType} appropriate for a ${gender}.`;
-  if (gender === 'male' && MALE_SPECS[clothingType]) {
-    spec = MALE_SPECS[clothingType];
-  } else if (gender === 'female' && FEMALE_SPECS[clothingType]) {
-    spec = FEMALE_SPECS[clothingType];
+  
+  let specKey = clothingType;
+  if (clothingType === 'Saree') {
+    if (style === 'nivi') specKey = 'Saree_Nivi';
+    else if (style === 'seedha_pallu') specKey = 'Saree_Seedha_Pallu';
+  }
+
+  if (gender === 'male' && MALE_SPECS[specKey]) {
+    spec = MALE_SPECS[specKey];
+  } else if (gender === 'female' && FEMALE_SPECS[specKey]) {
+    spec = FEMALE_SPECS[specKey];
   }
 
   return `

@@ -24,6 +24,7 @@ function getClient() {
  * @param {string} params.dressMime    - MIME type of dress image
  * @param {string} params.gender
  * @param {string} params.clothingType
+ * @param {string} [params.style]      - specific style, e.g. for Saree
  * @returns {Promise<{ image: string, mimeType: string }>}
  */
 export async function generateTryOnImage({
@@ -33,9 +34,10 @@ export async function generateTryOnImage({
   dressMime,
   gender,
   clothingType,
+  style,
 }) {
   const client = getClient();
-  const prompt = buildPrompt({ gender, clothingType });
+  const prompt = buildPrompt({ gender, clothingType, style });
 
   const personPart = {
     inlineData: {

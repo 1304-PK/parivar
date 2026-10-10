@@ -52,22 +52,60 @@ export async function generate(req, res) {
 
     // --- Call Google AI (Gemini) or mock ------------------------------------------
     const useMock = !process.env.GEMINI_API_KEY;
-    const result = useMock
-      ? await generateMockImage()
-      : await generateTryOnImage({
-          personImage: personFile.buffer,
-          personMime: personFile.mimetype,
-          dressImage: dressFile.buffer,
-          dressMime: dressFile.mimetype,
-          gender,
-          clothingType,
-        });
+    let results = [];
+    
+    if (clothingType === 'Saree' && gender === 'female') {
+      if (useMock) {
+        const res1 = await generateMockImage();
+        const res2 = await generateMockImage();
+        results = [
+          { ...res1, styleName: 'Nivi Drape' },
+          { ...res2, styleName: 'Seedha Pallu Drape' }
+        ];
+      } else {
+        const [res1, res2] = await Promise.all([
+          generateTryOnImage({
+            personImage: personFile.buffer,
+            personMime: personFile.mimetype,
+            dressImage: dressFile.buffer,
+            dressMime: dressFile.mimetype,
+            gender,
+            clothingType,
+            style: 'nivi',
+          }),
+          generateTryOnImage({
+            personImage: personFile.buffer,
+            personMime: personFile.mimetype,
+            dressImage: dressFile.buffer,
+            dressMime: dressFile.mimetype,
+            gender,
+            clothingType,
+            style: 'seedha_pallu',
+          })
+        ]);
+        results = [
+          { ...res1, styleName: 'Nivi Drape' },
+          { ...res2, styleName: 'Seedha Pallu Drape' }
+        ];
+      }
+    } else {
+      const res = useMock
+        ? await generateMockImage()
+        : await generateTryOnImage({
+            personImage: personFile.buffer,
+            personMime: personFile.mimetype,
+            dressImage: dressFile.buffer,
+            dressMime: dressFile.mimetype,
+            gender,
+            clothingType,
+          });
+      results = [{ ...res, styleName: clothingType }];
+    }
 
     return res.status(200).json({
       success: true,
       data: {
-        image: result.image,
-        mimeType: result.mimeType,
+        images: results,
         mock: useMock,
       },
     });
